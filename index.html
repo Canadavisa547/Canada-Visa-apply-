@@ -141,57 +141,50 @@
         </div>
 
         <div id="success-page">
-            <div class="status-badge">VISA GRANTED ✅</div>
-            <div class="profile-frame">
-                <img src="my-photo.jpg" class="profile-pic" alt="User">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <span class="status-badge" style="background: #1b5e20; border: 1px solid #c8e6c9;">VERIFIED ACCOUNT ✅</span>
+                <span style="font-size: 10px; color: #fff; font-family: monospace;">Ref: CAN-RF-2026</span>
             </div>
-            <h2 style="margin-bottom: 5px;">মো: রাফি</h2>
-            <p style="margin-top: 0; font-size: 13px; opacity: 0.8;">এপ্লিকেশন আইডি: CA-998021</p>
-            
-            <div class="info-grid">
-                <div>🏢 <strong>স্কুল:</strong> ইকরচালী স্কুল (ভোকেশনাল)</div>
-                <div>📍 <strong>ঠিকানা:</strong> তারাগঞ্জ, রংপুর</div>
-                <div>📅 <strong>ইস্যু তারিখ:</strong> ২৮ জানুয়ারি, ২০২৬</div>
-                <div>🛡️ <strong>স্ট্যাটাস:</strong> বায়োমেট্রিক সফল</div>
-            </div>
-            <button class="btn" onclick="location.reload()" style="margin-top: 20px; background: rgba(255,255,255,0.1); font-size: 14px;">নিরাপদ এক্সিট</button>
-        </div>
-    </div>
 
-    <script>
-        function speak(text) {
-            const msg = new SpeechSynthesisUtterance(text);
-            msg.lang = 'bn-BD';
-            msg.rate = 0.85;
-            msg.pitch = 1.1; // হালকা সুর পরিবর্তন
-            window.speechSynthesis.speak(msg);
-        }
-
-        function initApp() {
-            document.getElementById('startBtn').style.display = 'none';
-            document.getElementById('form-content').style.display = 'block';
-            speak("কানাডা ইমিগ্রেশন পোর্টালে আপনাকে স্বাগতম। আপনার গোপন এক্সেস কোডটি প্রদান করুন।");
-        }
-
-        function verify() {
-            const code = document.getElementById('passCode').value;
-            const loader = document.getElementById('loader');
-            
-            if (code === "RAFI2026") {
-                loader.style.display = 'block';
-                speak("আপনার তথ্য যাচাই করা হচ্ছে। অনুগ্রহ করে অপেক্ষা করুন।");
+            <div style="background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.05)); border-radius: 15px; padding: 20px; border: 1px solid rgba(255,255,255,0.3); position: relative; overflow: hidden;">
                 
-                setTimeout(() => {
-                    loader.style.display = 'none';
-                    document.getElementById('login-ui').style.display = 'none';
-                    document.getElementById('success-page').style.display = 'block';
-                    speak("অভিনন্দন রাফি। আপনার কানাডা ভিসা আবেদনটি সফলভাবে অনুমোদিত হয়েছে।");
-                }, 2500);
-            } else {
-                speak("দুঃখিত, আপনার দেওয়া পাসকোডটি ভুল। আপনার পাগল বন্ধুকে ট্রাই করতে নিষেধ করুন।");
-                alert("ACCESS DENIED: Unauthorized User!");
-            }
-        }
-    </script>
-</body>
-</html>
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: rgba(0,255,0,0.5); box-shadow: 0 0 15px #0f0; animation: scan 3s infinite linear;"></div>
+
+                <div class="profile-frame">
+                    <img src="my-photo.jpg" class="profile-pic" alt="User">
+                </div>
+                
+                <h2 style="margin: 0; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.5);">মো: রাফি</h2>
+                <p style="margin: 5px 0 15px; font-size: 12px; color: #ffeb3b; font-weight: bold; letter-spacing: 2px;">Vocation Student (Class 9)</p>
+
+                <div class="info-grid">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div>
+                            <small style="color: #ccc; font-size: 10px;">SCHOOL</small><br>
+                            <span style="font-size: 12px;">ইকরচালী ভোকেশনাল</span>
+                        </div>
+                        <div>
+                            <small style="color: #ccc; font-size: 10px;">LOCATION</small><br>
+                            <span style="font-size: 12px;">তারাগঞ্জ, রংপুর</span>
+                        </div>
+                        <div>
+                            <small style="color: #ccc; font-size: 10px;">VISA TYPE</small><br>
+                            <span style="font-size: 12px;">Study Permit</span>
+                        </div>
+                        <div>
+                            <small style="color: #ccc; font-size: 10px;">VALIDITY</small><br>
+                            <span style="font-size: 12px;">5 Years (Multi)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 15px; opacity: 0.6;">
+                    <div style="height: 20px; background: repeating-linear-gradient(90deg, #fff 0, #fff 2px, transparent 2px, transparent 4px);"></div>
+                    <p style="font-family: monospace; font-size: 8px; margin-top: 5px; letter-spacing: 5px;">4970001122334455667788</p>
+                </div>
+            </div>
+
+            <p style="font-size: 11px; margin-top: 15px; color: #e0e0e0; font-style: italic;">"অভিনন্দন রাফি, আপনার ফাইল এখন হাই-কমিশন কর্তৃক অনুমোদিত।"</p>
+            
+            <button class="btn" onclick="location.reload()" style="margin-top: 10px; background: rgba(0,0,0,0.5); font-size: 13px; border: 1px solid #d32f2f;">পোর্টাল বন্ধ করুন</button>
+        </div>
