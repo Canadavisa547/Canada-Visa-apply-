@@ -5,35 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Official Canada Visa Portal</title>
     <style>
-        /* প্রফেশনাল ব্যাকগ্রাউন্ড */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
             margin: 0;
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             background: #f4f4f4;
-            background-image: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url('https://www.countryflags.com/wp-content/uploads/canada-flag-png-large.png');
+            /* কানাডার পতাকার কালার থিম */
+            background-image: linear-gradient(135deg, #d32f2f 0%, #ffffff 50%, #d32f2f 100%);
             background-size: cover;
-            background-position: center;
         }
 
         .container {
             background: white;
             padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             width: 90%;
             max-width: 450px;
             text-align: center;
-            border-top: 8px solid #d32f2f; /* কানাডিয়ান লাল */
+            border-top: 10px solid #d32f2f;
         }
 
-        h1 { color: #d32f2f; font-size: 22px; margin-bottom: 10px; }
-        p.subtitle { color: #555; font-size: 14px; margin-bottom: 25px; }
+        h1 { color: #d32f2f; margin-bottom: 5px; font-size: 24px; }
+        p.subtitle { color: #555; margin-bottom: 25px; font-size: 14px; }
 
-        /* বাটন ও ইনপুট */
         .btn {
             width: 100%;
             padding: 14px;
@@ -45,7 +43,6 @@
             font-weight: bold;
             cursor: pointer;
             transition: 0.3s;
-            margin-top: 10px;
         }
 
         .btn:hover { background: #b71c1c; }
@@ -60,10 +57,10 @@
             font-size: 16px;
         }
 
-        /* সাকসেস সেকশন */
+        /* সাকসেস সেকশন ডিজাইন */
         #success-page {
             display: none;
-            animation: fadeIn 0.8s ease;
+            animation: fadeIn 0.8s ease-in-out;
         }
 
         @keyframes fadeIn {
@@ -72,8 +69,8 @@
         }
 
         .profile-pic {
-            width: 120px;
-            height: 120px;
+            width: 130px;
+            height: 130px;
             border-radius: 50%;
             border: 4px solid #28a745;
             margin: 20px auto;
@@ -81,72 +78,77 @@
             display: block;
         }
 
-        .success-msg {
-            color: #28a745;
+        .success-banner {
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 10px;
+            border-radius: 8px;
             font-weight: bold;
-            font-size: 20px;
+            margin-bottom: 15px;
         }
 
-        .info-box {
+        .info-card {
             text-align: left;
-            background: #f9f9f9;
+            background: #fdfdfd;
             padding: 15px;
+            border: 1px solid #eee;
             border-radius: 10px;
-            margin-top: 15px;
         }
     </style>
 </head>
 <body>
 
-    <div class="container" id="login-card">
-        <h1>🇨🇦 Canada Visa Application</h1>
-        <p class="subtitle">হাই কমিশন অফ কানাডা - অনলাইন পোর্টাল</p>
+    <div class="container">
+        <div id="login-section">
+            <h1>🇨🇦 Canada Visa Portal</h1>
+            <p class="subtitle">গভর্নমেন্ট অফ কানাডা - অনলাইন ই-সার্ভিস</p>
+            
+            <button id="startBtn" class="btn" style="background: #333;" onclick="startApp()">সাউন্ড অন করে শুরু করুন</button>
 
-        <button id="startBtn" class="btn" style="background: #222;" onclick="initVoice()">ভয়েস অন করে শুরু করুন</button>
-
-        <div id="auth-form" style="display: none;">
-            <input type="password" id="passCode" placeholder="আপনার গোপন পাসকোড দিন">
-            <button class="btn" onclick="verify()">ভেরিফাই করুন</button>
+            <div id="input-area" style="display:none; margin-top:20px;">
+                <input type="password" id="passCode" placeholder="আপনার গোপন পাসকোড দিন">
+                <button class="btn" onclick="verify()">ভেরিফাই করুন</button>
+            </div>
         </div>
 
         <div id="success-page">
-            <div class="success-msg">✔ Apply Success!</div>
-            <img src="my-photo.jpg" alt="Profile Picture" class="profile-pic">
-            <div class="info-box">
-                <p><strong>আবেদনকারী:</strong> মো: রাফি</p>
+            <div class="success-banner">✔ APPLICATION SUCCESSFUL</div>
+            <img src="my-photo.jpg" alt="Rafi's Photo" class="profile-pic">
+            <div class="info-card">
+                <p><strong>নাম:</strong> মো: রাফি</p>
                 <p><strong>স্কুল:</strong> ইকরচালী স্কুল (ভোকেশনাল)</p>
-                <p><strong>অবস্থান:</strong> ইকোরচালি, রংপুর</p>
-                <p><strong>স্ট্যাটাস:</strong> আপনার আবেদন সফলভাবে জমা হয়েছে।</p>
+                <p><strong>ক্লাস:</strong> নবম</p>
+                <p><strong>স্ট্যাটাস:</strong> ভিসা আবেদন অনুমোদিত ✅</p>
             </div>
-            <button class="btn" onclick="location.reload()" style="background: #555;">লগ আউট</button>
+            <button class="btn" onclick="location.reload()" style="margin-top:20px; background:#555;">লগ আউট</button>
         </div>
     </div>
 
     <script>
+        // ভয়েস ফাংশন
         function speak(text) {
             var msg = new SpeechSynthesisUtterance(text);
             msg.lang = 'bn-BD';
-            msg.rate = 0.9;
+            msg.rate = 0.9; // কথা বলার গতি
             window.speechSynthesis.speak(msg);
         }
 
-        function initVoice() {
+        function startApp() {
             document.getElementById('startBtn').style.display = 'none';
-            document.getElementById('auth-form').style.display = 'block';
+            document.getElementById('input-area').style.display = 'block';
             speak("কানাডা হাই কমিশন এ আপনাকে স্বাগতম। আপনার কোড দিয়ে সামনের ধাপে এগিয়ে যান।");
         }
 
         function verify() {
             var code = document.getElementById('passCode').value;
+            // তোমার পাসওয়ার্ড
             if (code === "RAFI2026") {
-                document.getElementById('auth-form').style.display = 'none';
-                document.querySelector('h1').innerText = "অ্যাপ্রুভড";
-                document.querySelector('.subtitle').style.display = 'none';
+                document.getElementById('login-section').style.display = 'none';
                 document.getElementById('success-page').style.display = 'block';
                 speak("আপনার পাসওয়ার্ড সঠিক হয়েছে। এপ্লাই সাকসেসফুল। অভিনন্দন রাফি।");
             } else {
-                alert("ভুল কোড! আপনার 'পাগল বন্ধু' কি ট্রাই করছে নাকি?");
-                speak("দুঃখিত, কোডটি ভুল হয়েছে। আবার চেষ্টা করুন।");
+                alert("ভুল কোড! আবার চেষ্টা করুন।");
+                speak("দুঃখিত, আপনার দেওয়া কোডটি ভুল। সঠিক কোড দিয়ে আবার চেষ্টা করুন।");
             }
         }
     </script>
