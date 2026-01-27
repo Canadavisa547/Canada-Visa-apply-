@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>প্রাইভেট পোর্টাল</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 50px; background-color: #f4f4f4; }
+        .box { background: white; padding: 20px; border-radius: 10px; display: inline-block; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        #content { display: none; margin-top: 20px; text-align: left; }
+        input { padding: 10px; width: 80%; margin-bottom: 10px; }
+        button { padding: 10px 20px; background: #28a745; color: white; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h2>সিক্রেট কোড দিন</h2>
+        <input type="password" id="code" placeholder="কোড লিখুন"> <br>
+        <button onclick="check()">সাবমিট</button>
+
+        <div id="content">
+            <hr>
+            <h3>আপনার তথ্য:</h3>
+            <p><strong>নাম:</strong> রাফি</p>
+            <p><strong>স্কুল:</strong> ইকরচালী স্কুল (ভোকেশনাল)</p>
+            <p><strong>স্ট্যাটাস:</strong> ভিসা এপ্লিকেশন রেডি।</p>
+        </div>
+    </div>
+
+    <script>
+        function check() {
+            var input = document.getElementById("code").value;
+            if (input === "1234") { // এখানে তোমার কোড দাও
+                document.getElementById("content").style.display = "block";
+                alert("সঠিক কোড!");
+            } else {
+                alert("ভুল কোড, আবার চেষ্টা করো!");
+            }
+        }
+    </script>
+</body>
+</html>
