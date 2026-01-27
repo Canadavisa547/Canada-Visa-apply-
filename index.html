@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Canada Immigration | Secure Portal</title>
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600&display=swap" rel="stylesheet">
+    <title>Canada Immigration | Government Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; font-family: 'Hind Siliguri', sans-serif; }
         
@@ -14,114 +14,126 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: url('https://images.unsplash.com/photo-1503614472-8c93d56e92ce?auto=format&fit=crop&w=1350&q=80');
-            background-size: cover;
-            background-position: center;
+            background: radial-gradient(circle, #2c3e50, #000000); /* ড্রামাটিক ডার্ক ব্যাকগ্রাউন্ড */
             overflow: hidden;
         }
 
-        /* মেইন কার্ড */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 25px;
-            padding: 35px;
-            width: 90%;
-            max-width: 450px;
-            text-align: center;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-            color: white;
-            position: relative;
+        /* ব্যাকগ্রাউন্ড অ্যানিমেশন */
+        body::before {
+            content: "";
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+            opacity: 0.1;
+            animation: move 100s linear infinite;
         }
 
-        .logo { width: 70px; margin-bottom: 10px; filter: drop-shadow(0 0 10px rgba(255,0,0,0.5)); }
-        h1 { font-size: 24px; margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); color: #fff; }
-        p.tagline { font-size: 13px; opacity: 0.8; margin-bottom: 25px; letter-spacing: 1px; }
+        @keyframes move { from { transform: translate(0,0); } to { transform: translate(-50%, -50%); } }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 30px;
+            padding: 40px;
+            width: 95%;
+            max-width: 480px;
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+            color: white;
+            z-index: 10;
+        }
+
+        .logo { width: 60px; margin-bottom: 10px; filter: drop-shadow(0 0 15px rgba(255, 0, 0, 0.8)); }
+        
+        h1 { font-size: 22px; letter-spacing: 2px; margin: 0; color: #ff4d4d; }
+        .tagline { font-size: 12px; text-transform: uppercase; opacity: 0.7; margin-bottom: 30px; }
 
         input {
             width: 100%;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255,255,255,0.3);
-            border-radius: 12px;
-            color: white;
-            font-size: 18px;
+            padding: 18px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            color: #fff;
+            font-size: 20px;
             text-align: center;
             outline: none;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            transition: 0.3s;
         }
+
+        input:focus { border-color: #ff4d4d; box-shadow: 0 0 20px rgba(255, 77, 77, 0.3); }
 
         .btn {
             width: 100%;
-            padding: 15px;
-            background: #d32f2f;
+            padding: 16px;
+            background: linear-gradient(90deg, #d32f2f, #ff4d4d);
             color: white;
             border: none;
-            border-radius: 12px;
+            border-radius: 15px;
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
-            transition: 0.3s;
-            text-transform: uppercase;
+            box-shadow: 0 10px 20px rgba(211, 47, 47, 0.4);
         }
 
-        .btn:hover { transform: scale(1.02); background: #ff4d4d; }
+        /* উন্নত ভিসা কার্ড লুক */
+        .visa-container {
+            display: none;
+            text-align: center;
+            animation: scaleIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
 
-        /* সাকসেস সেকশন */
-        #success-page { display: none; }
+        @keyframes scaleIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
-        .visa-card {
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 15px;
-            padding: 20px;
-            border: 1px solid rgba(255,255,255,0.3);
+        .digital-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.02));
+            border-radius: 20px;
+            padding: 25px;
+            border: 1px solid rgba(255,255,255,0.2);
             position: relative;
-            overflow: hidden;
-            margin-top: 15px;
-        }
-
-        /* স্ক্যানিং এনিমেশন */
-        .scan-line {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: #00ff00;
-            box-shadow: 0 0 15px #00ff00;
-            animation: scan 3s infinite linear;
-        }
-
-        @keyframes scan {
-            0% { top: 0; }
-            100% { top: 100%; }
+            margin-top: 10px;
+            box-shadow: inset 0 0 20px rgba(255,255,255,0.05);
         }
 
         .profile-pic {
-            width: 110px;
-            height: 110px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
-            border: 4px solid #28a745;
-            margin: 10px auto;
-            display: block;
+            border: 4px solid #00e676;
+            margin: 0 auto 15px;
             object-fit: cover;
+            box-shadow: 0 0 25px rgba(0, 230, 118, 0.4);
         }
 
-        .info-grid {
-            text-align: left;
-            font-size: 13px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            background: rgba(0,0,0,0.3);
-            padding: 15px;
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            background: rgba(0,0,0,0.2);
+            padding: 12px 18px;
             border-radius: 10px;
-            margin-top: 10px;
+            margin-bottom: 8px;
+            font-size: 14px;
+            border-left: 4px solid #ff4d4d;
         }
 
-        #loader { display: none; margin: 15px auto; border: 4px solid #f3f3f3; border-top: 4px solid #d32f2f; border-radius: 50%; width: 35px; height: 35px; animation: spin 1s linear infinite; }
+        .scan-bar {
+            position: absolute;
+            width: 100%;
+            height: 4px;
+            background: rgba(0, 230, 118, 0.6);
+            top: 0;
+            left: 0;
+            box-shadow: 0 0 20px #00e676;
+            animation: moveScan 3s infinite ease-in-out;
+        }
+
+        @keyframes moveScan { 0%, 100% { top: 0%; } 50% { top: 98%; } }
+
+        #loader { display: none; border: 3px solid #f3f3f3; border-top: 3px solid #ff4d4d; border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; margin: 10px auto; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
@@ -130,35 +142,32 @@
     <div class="glass-card">
         <div id="login-ui">
             <img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Flag_of_Canada_%28Pantone%29.svg" class="logo">
-            <h1>CANADA IMMIGRATION</h1>
-            <p class="tagline">Official Secure Access Portal</p>
+            <h1>IMMIGRATION CANADA</h1>
+            <p class="tagline">Secure Identity Access</p>
             
-            <button id="startBtn" class="btn" style="background: #222;" onclick="initApp()">🔊 পোর্টাল সক্রিয় করুন</button>
+            <button id="startBtn" class="btn" style="background: #111;" onclick="initSystem()">সিস্টেম চালু করুন</button>
 
-            <div id="form-content" style="display:none;">
-                <input type="password" id="passCode" placeholder="এক্সেস কোড দিন">
-                <button class="btn" onclick="verify()">ভেরিফাই করুন</button>
+            <div id="secret-form" style="display:none;">
+                <input type="password" id="passCode" placeholder="এক্সেস পিন কোড">
+                <button class="btn" onclick="authorize()">ভেরিফাই আইডেন্টিটি</button>
                 <div id="loader"></div>
             </div>
         </div>
 
-        <div id="success-page">
-            <div style="background: #1b5e20; font-size: 12px; padding: 5px; border-radius: 5px; margin-bottom: 10px;">VISA STATUS: GRANTED ✅</div>
-            
-            <div class="visa-card">
-                <div class="scan-line"></div>
+        <div id="success-page" class="visa-container">
+            <h2 style="color: #00e676; margin-bottom: 15px;">অ্যাক্সেস গ্রান্টেড ✅</h2>
+            <div class="digital-card">
+                <div class="scan-bar"></div>
                 <img src="my-photo.jpg" class="profile-pic" alt="Rafi">
-                <h2 style="margin: 10px 0 0;">মো: রাফি</h2>
-                <p style="color: #ffeb3b; font-size: 12px; margin: 0 0 10px;">ID: CA-998021-RF</p>
+                <h2 style="margin: 0; letter-spacing: 1px;">মো: রাফি</h2>
+                <p style="color: #ffeb3b; font-size: 12px; margin: 5px 0 20px;">Permit No: CA-RAFI-2026-OK</p>
 
-                <div class="info-grid">
-                    <div><small>SCHOOL</small><br>ইকরচালী ভোকেশনাল</div>
-                    <div><small>LOCATION</small><br>তারাগঞ্জ, রংপুর</div>
-                    <div><small>TYPE</small><br>Study Permit</div>
-                    <div><small>EXPIRES</small><br>Jan 2031</div>
-                </div>
+                <div class="info-row"><span>শিক্ষা প্রতিষ্ঠান:</span><strong>ইকরচালী ভোকেশনাল</strong></div>
+                <div><div class="info-row"><span>শ্রেণি:</span><strong>নবম</strong></div></div>
+                <div class="info-row"><span>অবস্থান:</span><strong>তারাগঞ্জ, রংপুর</strong></div>
+                <div class="info-row"><span>ভিসা স্ট্যাটাস:</span><strong style="color:#00e676">সফল</strong></div>
             </div>
-            <button class="btn" onclick="location.reload()" style="margin-top: 20px; background: rgba(0,0,0,0.4);">লগ আউট</button>
+            <p style="font-size: 10px; color: #888; margin-top: 20px;">আপনার এই ডিজিটাল আইডিটি সুরক্ষিত সার্ভারে সংরক্ষিত।</p>
         </div>
     </div>
 
@@ -166,34 +175,34 @@
         function speak(text) {
             const msg = new SpeechSynthesisUtterance(text);
             msg.lang = 'bn-BD';
-            msg.rate = 0.85; // মিষ্টি মেয়েলি ভয়েস করার জন্য স্পিড কিছুটা কমিয়ে রাখা
-            msg.pitch = 1.2; // গলার স্বর কিছুটা চিকন করার জন্য
+            msg.rate = 0.85;
+            msg.pitch = 1.2; 
             window.speechSynthesis.speak(msg);
         }
 
-        function initApp() {
+        function initSystem() {
             document.getElementById('startBtn').style.display = 'none';
-            document.getElementById('form-content').style.display = 'block';
-            speak("কানাডা হাই কমিশন এ আপনাকে স্বাগতম। আপনার কোড দিয়ে সামনের ধাপে এগিয়ে যান।");
+            document.getElementById('secret-form').style.display = 'block';
+            speak("কানাডা হাই কমিশন পোর্টালে আপনাকে স্বাগতম। আপনার সিক্রেট পিন কোড দিয়ে আইডেন্টিটি ভেরিফাই করুন।");
         }
 
-        function verify() {
+        function authorize() {
             const code = document.getElementById('passCode').value;
             const loader = document.getElementById('loader');
             
             if (code === "RAFI2026") {
                 loader.style.display = 'block';
-                speak("আপনার তথ্য যাচাই করা হচ্ছে। অনুগ্রহ করে অপেক্ষা করুন।");
+                speak("আপনার বায়োমেট্রিক এবং পিন যাচাই করা হচ্ছে।");
                 
                 setTimeout(() => {
                     loader.style.display = 'none';
                     document.getElementById('login-ui').style.display = 'none';
                     document.getElementById('success-page').style.display = 'block';
-                    speak("অভিনন্দন রাফি। আপনার ভিসা আবেদনটি সফলভাবে অনুমোদিত হয়েছে।");
-                }, 2500);
+                    speak("অভিনন্দন রাফি। আপনার পরিচয় সফলভাবে নিশ্চিত করা হয়েছে এবং ভিসা আবেদনটি অনুমোদিত হয়েছে।");
+                }, 2000);
             } else {
-                speak("দুঃখিত, পাসকোডটি সঠিক নয়। আবার চেষ্টা করুন।");
-                alert("ACCESS DENIED!");
+                speak("ভুল পিন কোড। অনুপ্রবেশ নিষিদ্ধ। আপনার পাগল বন্ধুকে সাবধান করে দিন।");
+                alert("ACCESS DENIED: Intruders Detected!");
             }
         }
     </script>
