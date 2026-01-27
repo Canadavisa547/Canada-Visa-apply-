@@ -3,96 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>প্রাইভেট পোর্টাল | রাফি</title>
+    <title>Canada High Commission | Portal</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-        .card {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-            width: 90%;
-            max-width: 400px;
-            text-align: center;
-        }
-        h2 { color: #4a4a4a; }
-        input {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 20px;
-            border: 2px solid #e0e0e0;
-            border-radius:IMG_20260124_175624_590.jpgpx;
-            box-sizing: border-box;
-        }
-        button {
-            width: 100%;
-            padding: 12px;
-            background: #667eea;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 18px;
-            cursor: pointer;
-        }
-        #content {
-            display: none;
-            margin-top: 25px;
-            text-align: left;
-            padding: 20px;
-            background: #f9f9f9;
-            border-radius: 12px;
-            border-left: 6px solid #667eea;
-        }
-        .profile-img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            margin-bottom: 15px;
-            border: 3px solid #667eea;
-            object-fit: cover;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; height: 100vh; display: flex; justify-content: center; align-items: center; background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%); }
+        .card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.2); width: 90%; max-width: 400px; text-align: center; }
+        h2 { color: #d32f2f; }
+        input { width: 100%; padding: 12px; margin-bottom: 20px; border: 2px solid #eee; border-radius: 10px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background: #d32f2f; color: white; border: none; border-radius: 10px; font-size: 18px; cursor: pointer; }
+        #content { display: none; margin-top: 25px; text-align: left; padding: 20px; background: #f9f9f9; border-radius: 12px; border-left: 6px solid #d32f2f; }
     </style>
 </head>
 <body>
 
     <div class="card">
-        <h2 id="title">🔒 সিক্রেট পোর্টাল</h2>
-        <input type="password" id="code" placeholder="গোপন কোড দিন">
-        <button onclick="check()">তথ্য দেখুন</button>
+        <h2>🇨🇦 Canada High Commission</h2>
+        <p style="color: #666; font-size: 14px;">নিরাপদ অ্যাক্সেসের জন্য কোড দিন</p>
+        <input type="password" id="code" placeholder="Enter Secret Code">
+        <button onclick="check()">পরবর্তী ধাপ</button>
 
         <div id="content">
-            <img src="profile.jpg" alt="Rafi" class="profile-img">
-            <h3 style="text-align:center; color:#667eea;">স্বাগতম, রাফি!</h3>
-            <p><strong>স্কুল:</strong> ইকরচালী স্কুল (ভোকেশনাল)</p>
-            <p><strong>বিভাগ:</strong> ক্লাস নাইন</p>
-            <p><strong>স্ট্যাটাস:</strong> ডাটাবেস অনলাইন ✅</p>
+            <h3 style="color: #d32f2f;">অভিনন্দন রাফি!</h3>
+            <p>আপনার সকল তথ্য যাচাই করা হয়েছে।</p>
+            <p><strong>স্কুল:</strong> ইকরচালী স্কুল</p>
+            <p><strong>ভিসা স্ট্যাটাস:</strong> প্রক্রিয়াধীন...</p>
         </div>
     </div>
 
     <script>
+        // সাইট লোড হলে কথা বলবে
+        window.onload = function() {
+            setTimeout(function() {
+                var msg = new SpeechSynthesisUtterance("কানাডা হাই কমিশন এ আপনাকে স্বাগতম। আপনার কোড দিয়ে সামনের ধাপে এগিয়ে যান।");
+                msg.lang = 'bn-BD';
+                window.speechSynthesis.speak(msg);
+            }, 1000); // ১ সেকেন্ড পর কথা বলবে
+        };
+
         function check() {
             var input = document.getElementById("code").value;
-            var mySecret = "RAFI2026"; // তোমার পাসওয়ার্ড
-
-            if (input === mySecret) {
+            if (input === "RAFI2026") {
                 document.getElementById("content").style.display = "block";
-                document.getElementById("title").innerText = "✅ এক্সেস গ্রান্টেড";
+                var success = new SpeechSynthesisUtterance("কোড সঠিক হয়েছে। আপনাকে স্বাগতম।");
+                success.lang = 'bn-BD';
+                window.speechSynthesis.speak(success);
             } else {
-                alert("ভুল কোড! আবার চেষ্টা করুন।");
+                alert("ভুল কোড!");
             }
         }
     </script>
-
 </body>
 </html>
