@@ -3,94 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Immigration, Refugees and Citizenship Canada</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <title>IRCC Portal | Canada Visa Confirmation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Noto+Sans+Bengali:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root { --canada-red: #D80621; --dark-gray: #333333; --success-green: #28a745; }
-        body { font-family: 'Open Sans', 'Noto Sans Bengali', sans-serif; margin: 0; background: #f9f9f9; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        :root { --ca-red: #D80621; --ca-blue: #004795; --bg-gray: #f2f5f7; }
+        body { font-family: 'Roboto', 'Noto Sans Bengali', sans-serif; margin: 0; background: var(--bg-gray); display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow-x: hidden; }
+
+        .app-container { background: white; width: 95%; max-width: 600px; border-radius: 8px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); border-top: 8px solid var(--ca-red); position: relative; }
+
+        /* অফিশিয়াল টপ বার */
+        .top-bar { background: #fff; padding: 15px 25px; border-bottom: 2px solid #eee; display: flex; justify-content: space-between; align-items: center; }
+        .ca-logo { font-weight: bold; color: #333; font-size: 18px; letter-spacing: -1px; }
+        .ca-logo span { color: var(--ca-red); }
+
+        .hero-content { padding: 40px; text-align: center; }
+        .hero-content h1 { font-size: 24px; color: #333; margin-bottom: 10px; }
         
-        /* মেইন কার্ড ডিজাইন */
-        .portal-container { background: white; width: 95%; max-width: 550px; border-radius: 4px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); border-top: 6px solid var(--canada-red); overflow: hidden; position: relative; }
+        /* উন্নত ইনপুট */
+        input { width: 100%; padding: 15px; margin: 25px 0; border: 2px solid #ddd; border-radius: 5px; font-size: 18px; text-align: center; color: var(--ca-blue); font-weight: bold; }
+        input:focus { border-color: var(--ca-red); outline: none; box-shadow: 0 0 8px rgba(216, 6, 33, 0.2); }
+
+        .action-btn { width: 100%; padding: 16px; background: var(--ca-red); color: white; border: none; border-radius: 5px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 10px rgba(216, 6, 33, 0.3); }
+        .action-btn:hover { background: #b0051a; transform: translateY(-2px); }
+
+        /* সাকসেস পেজ */
+        #success-view { display: none; padding: 40px; position: relative; animation: slideUp 0.6s ease; }
         
-        .header { padding: 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; background: #fff; }
-        .logo-text { color: var(--dark-gray); font-weight: bold; font-size: 18px; display: flex; align-items: center; }
-        .logo-text span { color: var(--canada-red); margin-left: 5px; }
+        .confirmation-badge { background: #e8f5e9; border: 2px solid #2e7d32; color: #2e7d32; padding: 15px; border-radius: 5px; display: flex; align-items: center; margin-bottom: 30px; font-weight: bold; }
 
-        .content { padding: 30px; text-align: center; }
-        h1 { font-size: 22px; color: var(--dark-gray); margin-bottom: 10px; }
-        .subtitle { font-size: 14px; color: #666; margin-bottom: 30px; }
+        .details-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        .details-table td { padding: 12px; border-bottom: 1px solid #f0f0f0; font-size: 14px; }
+        .label { color: #777; width: 40%; }
+        .val { color: #333; font-weight: bold; text-align: right; }
 
-        /* বাটন ও ইনপুট */
-        input { width: 100%; padding: 15px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px; transition: 0.3s; }
-        input:focus { border-color: var(--canada-red); outline: none; box-shadow: 0 0 5px rgba(216, 6, 33, 0.2); }
+        /* অফিশিয়াল স্ট্যাম্প */
+        .official-seal { 
+            position: absolute; top: 10%; right: 5%; width: 120px; height: 120px; 
+            border: 4px double #d32f2f; border-radius: 50%; color: #d32f2f; 
+            display: flex; align-items: center; justify-content: center; text-align: center;
+            font-weight: bold; font-size: 12px; transform: rotate(20deg); opacity: 0;
+            animation: stampIn 0.5s 3.5s forwards; pointer-events: none;
+        }
 
-        .btn-main { width: 100%; padding: 15px; background: var(--canada-red); color: white; border: none; border-radius: 4px; font-size: 16px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
-        .btn-main:hover { background: #b0051a; }
+        @keyframes stampIn { from { opacity: 0; transform: scale(3) rotate(45deg); } to { opacity: 0.2; transform: scale(1) rotate(20deg); } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* সাকসেস পেজ ডিজাইন */
-        #success-page { display: none; text-align: left; animation: fadeIn 0.8s ease; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        .success-banner { background: #e8f5e9; border-left: 5px solid var(--success-green); padding: 15px; margin-bottom: 25px; display: flex; align-items: center; }
-        .success-banner i { color: var(--success-green); font-size: 24px; margin-right: 15px; }
-
-        .receipt-box { border: 1px solid #ddd; padding: 20px; border-radius: 4px; background: #fff; position: relative; }
-        .receipt-box::after { content: "SUBMITTED"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-15deg); font-size: 40px; color: rgba(40, 167, 69, 0.1); font-weight: bold; border: 5px solid rgba(40, 167, 69, 0.1); padding: 10px; border-radius: 10px; pointer-events: none; }
-
-        .data-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f1f1f1; font-size: 14px; }
-        .label { color: #777; font-weight: bold; }
-        .value { color: var(--dark-gray); font-weight: 600; }
-
-        .qr-code { width: 80px; height: 80px; margin-top: 20px; float: right; }
-
-        #loader { display: none; width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid var(--canada-red); border-radius: 50%; animation: spin 1s linear infinite; margin: 20px auto; }
+        /* লোডার */
+        #processing { display: none; margin: 20px auto; }
+        .spinner { width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid var(--ca-red); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
 
-    <div class="portal-container">
-        <div class="header">
-            <div class="logo-text">Government of <span>Canada</span></div>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Flag_of_Canada_%28Pantone%29.svg" width="40" alt="Flag">
+    <div class="app-container">
+        <div class="top-bar">
+            <div class="ca-logo">Government of <span>Canada</span></div>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Flag_of_Canada_%28Pantone%29.svg" width="35">
         </div>
 
-        <div class="content">
-            <div id="login-ui">
-                <h1>Visa Application Tracking</h1>
-                <p class="subtitle">আপনার আবেদনের বর্তমান অবস্থা জানতে লগইন করুন।</p>
-                
-                <button id="vBtn" class="btn-main" style="background:#444; margin-bottom:20px;" onclick="enableAudio()">🔊 সিস্টেম সক্রিয় করুন</button>
+        <div id="auth-view" class="hero-content">
+            <h1>Track Your Visa Status</h1>
+            <p style="color:#666; font-size: 14px;">আপনার ব্যক্তিগত এক্সেস কোডটি ব্যবহার করে লগইন করুন।</p>
+            
+            <button id="audio-init" class="action-btn" style="background:#333; margin-bottom:15px;" onclick="enableSystem()">🔑 পোর্টাল সক্রিয় করুন</button>
 
-                <div id="auth-area" style="display:none;">
-                    <input type="password" id="pass" placeholder="Enter Application Access Code">
-                    <button class="btn-main" onclick="process()">চেক স্ট্যাটাস</button>
-                    <div id="loader"></div>
-                </div>
+            <div id="input-section" style="display:none;">
+                <input type="password" id="entry-code" placeholder="ENTER ACCESS CODE">
+                <button class="action-btn" onclick="startProcessing()">চেক অ্যাপ্লিকেশন স্ট্যাটাস</button>
+                <div id="processing"><div class="spinner"></div><p style="color:#666; font-size: 12px; margin-top: 10px;">Verifying credentials...</p></div>
+            </div>
+        </div>
+
+        <div id="success-view">
+            <div class="official-seal">OFFICIAL SEAL<br>IRCC<br>VERIFIED</div>
+            
+            <div class="confirmation-badge">
+                <span style="font-size:24px; margin-right:15px;">✔</span>
+                SUBMISSION CONFIRMED - APPROVED
             </div>
 
-            <div id="success-page">
-                <div class="success-banner">
-                    <span style="font-size:30px; margin-right:15px;">✅</span>
-                    <div>
-                        <strong style="color:var(--success-green); font-size:18px;">Application Successful</strong><br>
-                        <span style="font-size:12px; color:#555;">আপনার ফাইলটি সফলভাবে কানাডা ইমিগ্রেশনে পাঠানো হয়েছে।</span>
-                    </div>
-                </div>
+            <table class="details-table">
+                <tr><td class="label">Applicant Name:</td><td class="val">Mohammad Rafi</td></tr>
+                <tr><td class="label">Institution:</td><td class="val">Ekarchali Vocational School</td></tr>
+                <tr><td class="label">Location:</td><td class="val">Rangpur, Bangladesh</td></tr>
+                <tr><td class="label">Application Type:</td><td class="val">Student Visa (Class 9)</td></tr>
+                <tr><td class="label">File Status:</td><td class="val" style="color:#2e7d32">Successfully Submitted</td></tr>
+                <tr><td class="label">Reference No:</td><td class="val">CA-RF-2026-99120</td></tr>
+            </table>
 
-                <div class="receipt-box">
-                    <div class="data-row"><span class="label">আবেদনকারীর নাম</span><span class="value">মো: রাফি</span></div>
-                    <div class="data-row"><span class="label">প্রতিষ্ঠান</span><span class="value">ইকরচালী ভোকেশনাল স্কুল</span></div>
-                    <div class="data-row"><span class="label">আবেদনের ধরন</span><span class="value">Study Permit (Class 9)</span></div>
-                    <div class="data-row"><span class="label">ট্র্যাকিং নম্বর</span><span class="value">CAN-RF2026-X99B</span></div>
-                    <div class="data-row"><span class="label">স্ট্যাটাস</span><span class="value" style="color:var(--success-green)">অনুমোদিত (Approved)</span></div>
-                    
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Rafi_Canada_Visa_2026" class="qr-code" alt="QR">
-                    <div style="clear:both;"></div>
-                </div>
-                
-                <p style="font-size:11px; color:#999; margin-top:20px; text-align:center;">© 2026 Immigration, Refugees and Citizenship Canada</p>
+            <div style="margin-top: 25px; text-align: center;">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=Rafi_Approved_2026_Canada" style="border: 1px solid #ddd; padding: 5px;">
+                <p style="font-size: 10px; color: #999; margin-top: 10px;">Security Verification QR - Scannable</p>
             </div>
+        </div>
+        
+        <div style="background: #f1f1f1; padding: 10px; text-align: center; font-size: 10px; color: #777;">
+            © 2026 Immigration, Refugees and Citizenship Canada (IRCC)
         </div>
     </div>
 
@@ -98,32 +107,31 @@
         function speak(text) {
             const msg = new SpeechSynthesisUtterance(text);
             msg.lang = 'bn-BD';
-            msg.rate = 0.85;
-            msg.pitch = 1.3; // মেয়েলি ভয়েসের ফিল দেওয়ার জন্য
+            msg.rate = 0.9;
+            msg.pitch = 1.3; // সেই সুন্দর মেয়েলি ভয়েস
             window.speechSynthesis.speak(msg);
         }
 
-        function enableAudio() {
-            document.getElementById('vBtn').style.display = 'none';
-            document.getElementById('auth-area').style.display = 'block';
-            speak("কানাডা ইমিগ্রেশন পোর্টালে আপনাকে স্বাগতম। আপনার এপ্লিকেশন কোডটি প্রদান করুন।");
+        function enableSystem() {
+            document.getElementById('audio-init').style.display = 'none';
+            document.getElementById('input-section').style.display = 'block';
+            speak("কানাডা হাই কমিশন পোর্টালে আপনাকে স্বাগতম। আপনার এপ্লিকেশন কোডটি প্রদান করুন।");
         }
 
-        function process() {
-            const code = document.getElementById('pass').value;
-            if(code === "RAFI2026") {
-                document.getElementById('loader').style.display = 'block';
-                speak("আপনার ডাটাবেস চেক করা হচ্ছে। দয়া করে কয়েক সেকেন্ড অপেক্ষা করুন।");
+        function startProcessing() {
+            const code = document.getElementById('entry-code').value;
+            if (code === "RAFI2026") {
+                document.getElementById('processing').style.display = 'block';
+                speak("আপনার বায়োমেট্রিক এবং ডাটা যাচাই করা হচ্ছে। কয়েক সেকেন্ড অপেক্ষা করুন।");
                 
                 setTimeout(() => {
-                    document.getElementById('loader').style.display = 'none';
-                    document.getElementById('login-ui').style.display = 'none';
-                    document.getElementById('success-page').style.display = 'block';
-                    speak("অভিনন্দন রাফি। আপনার কানাডা ভিসা আবেদনটি সফল হয়েছে। আপনার কনফার্মেশন রিপোর্টটি এখানে দেওয়া হলো।");
-                }, 3000);
+                    document.getElementById('auth-view').style.display = 'none';
+                    document.getElementById('success-view').style.display = 'block';
+                    speak("অভিনন্দন রাফি। আপনার কানাডা ভিসা আবেদনটি সফলভাবে অনুমোদিত হয়েছে। আপনার কনফার্মেশন রিপোর্টটি এখানে দেওয়া হলো।");
+                }, 3500);
             } else {
-                speak("দুঃখিত, কোডটি ভুল। আপনার পাগল বন্ধুকে বলবেন না।");
-                alert("Error: Incorrect Access Code");
+                speak("দুঃখিত, এক্সেস কোডটি ভুল। আবার চেষ্টা করুন।");
+                alert("Unauthorized Access Attempt!");
             }
         }
     </script>
