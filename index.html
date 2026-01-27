@@ -3,440 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Immigration, Refugees and Citizenship Canada - Official Confirmation</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Noto+Sans+Bengali:wght@400;700&display=swap" rel="stylesheet">
+    <title>IRCC - Official Confirmation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <style>
-        :root {
-            --ca-red: #D80621;
-            --ca-blue: #004795;
-            --dark-grey: #333;
-            --light-grey: #f5f5f5;
-            --success-green: #28a745;
-        }
+        :root { --ca-red: #D80621; --dark-gray: #333; --light-bg: #fdfdfd; }
+        body { font-family: 'Roboto', 'Noto Sans Bengali', sans-serif; margin: 0; background: #e9ecef; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
 
-        body {
-            font-family: 'Roboto', 'Noto Sans Bengali', sans-serif;
-            margin: 0;
-            background: var(--light-grey);
-            display: flex;
-            justify-content: center;
-            align-items: flex-start; /* Align at the top */
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .portal-main {
-            background: white;
-            width: 100%;
-            max-width: 750px;
-            border-radius: 8px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            border-top: 8px solid var(--ca-red);
-            overflow: hidden;
-            position: relative;
-        }
+        .document-page { background: white; width: 95%; max-width: 700px; min-height: 900px; box-shadow: 0 0 30px rgba(0,0,0,0.2); position: relative; border-top: 15px solid var(--ca-red); display: flex; flex-direction: column; }
 
         /* হেডার */
-        .gov-header {
-            padding: 20px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #eee;
-            background: #fff;
-        }
-        .gov-header-left {
-            display: flex;
-            align-items: center;
-        }
-        .gov-logo-text {
-            font-weight: 700;
-            color: var(--dark-grey);
-            font-size: 19px;
-            margin-left: 10px;
-        }
-        .gov-logo-text span {
-            color: var(--ca-red);
-        }
+        .header { padding: 25px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; }
+        .logo-box { display: flex; align-items: center; gap: 10px; font-weight: bold; font-size: 20px; color: #555; }
+        .logo-box span { color: var(--ca-red); }
+        .live-clock { font-size: 13px; color: #777; font-family: monospace; }
 
-        /* লগইন/ইনপুট এরিয়া */
-        .auth-section {
-            padding: 50px 40px;
-            text-align: center;
-        }
-        .auth-section h1 {
-            font-size: 26px;
-            color: var(--dark-grey);
-            margin-bottom: 10px;
-        }
-        .auth-section p {
-            font-size: 15px;
-            color: #666;
-            margin-bottom: 30px;
-        }
-        .input-group {
-            position: relative;
-            width: 80%;
-            margin: 0 auto 25px auto;
-        }
-        .input-group i {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 20px;
-            color: #aaa;
-        }
-        .access-input {
-            width: 100%;
-            padding: 15px 15px 15px 50px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
-            outline: none;
-            transition: 0.3s;
-        }
-        .access-input:focus {
-            border-color: var(--ca-blue);
-            box-shadow: 0 0 8px rgba(0, 71, 149, 0.1);
-        }
-        .btn-action {
-            width: 80%;
-            padding: 15px;
-            background: var(--ca-red);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin: 0 auto;
-        }
-        .btn-action:hover {
-            background: #b0051a;
-            transform: translateY(-2px);
-        }
+        /* মেইন কন্টেন্ট */
+        .main-content { padding: 50px 40px; flex-grow: 1; text-align: center; }
+        
+        /* সাকসেস ব্যাজ */
+        .status-badge { background: #eaf6ec; color: #2e7d32; padding: 10px 20px; border-radius: 50px; display: inline-flex; align-items: center; gap: 10px; font-weight: bold; font-size: 14px; border: 1px solid #c8e6c9; margin-bottom: 30px; }
+
+        .doc-title { font-size: 28px; color: #004795; font-weight: bold; margin-bottom: 10px; }
+        .doc-subtitle { font-size: 15px; color: #666; margin-bottom: 40px; }
+
+        /* ইনফো টেবিল */
+        .info-container { border-left: 5px solid var(--ca-red); background: #fafafa; padding: 30px; text-align: left; position: relative; }
+        .info-table { width: 100%; border-collapse: collapse; }
+        .info-table td { padding: 12px 0; font-size: 15px; border-bottom: 1px solid #eee; }
+        .label { color: #777; font-weight: 500; width: 40%; }
+        .value { color: #333; font-weight: 700; text-align: right; }
+
+        /* সিল এনিমেশন */
+        .official-seal { position: absolute; top: -50px; right: 20px; width: 150px; opacity: 0; transform: scale(3); transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .sealed .official-seal { opacity: 0.3; transform: scale(1) rotate(15deg); }
+
+        /* ফুটার বারকোড সেকশন */
+        .footer-assets { margin-top: 60px; display: flex; justify-content: space-between; align-items: flex-end; padding: 0 40px 40px; }
+        .barcode-text { font-family: 'Courier New', Courier, monospace; font-size: 35px; color: #333; letter-spacing: 5px; }
+
+        /* ডার্ক ফুটার */
+        .dark-footer { background: #333; color: white; padding: 20px; text-align: center; font-size: 11px; line-height: 1.6; }
+
+        /* লগইন স্ক্রিন */
+        #login-screen { position: absolute; inset: 0; background: #fff; z-index: 100; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 40px; }
+        .btn-start { background: var(--ca-red); color: white; border: none; padding: 15px 40px; border-radius: 5px; font-size: 18px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .btn-start:hover { transform: scale(1.05); }
+        input { width: 250px; padding: 15px; border: 1px solid #ccc; border-radius: 5px; margin: 20px 0; text-align: center; font-size: 18px; }
 
         /* লোডার */
-        #loading-animation {
-            display: none;
-            margin: 30px auto 0 auto;
-            text-align: center;
-        }
-        .spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid var(--ca-red);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 10px auto;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* সাকসেস কনফার্মেশন লেটার */
-        #confirmation-letter {
-            display: none;
-            padding: 40px 50px;
-            position: relative;
-            animation: fadeIn 1s ease-out;
-            line-height: 1.6;
-            color: var(--dark-grey);
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .letter-header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        .letter-header h2 {
-            font-size: 28px;
-            color: var(--ca-blue);
-            margin-bottom: 10px;
-        }
-        .letter-header .sub-text {
-            font-size: 16px;
-            color: #555;
-            font-weight: 500;
-        }
-
-        .status-badge {
-            background: #e8f5e9;
-            border: 1px solid var(--success-green);
-            color: var(--success-green);
-            padding: 12px 20px;
-            border-radius: 25px;
-            font-weight: bold;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 25px;
-            animation: pulse 1.5s infinite alternate;
-        }
-        @keyframes pulse {
-            from { transform: scale(1); box-shadow: 0 0 0 rgba(40, 167, 69, 0.4); }
-            to { transform: scale(1.02); box-shadow: 0 0 10px rgba(40, 167, 69, 0.8); }
-        }
-
-        .info-block {
-            background: #fdfdfd;
-            border: 1px solid #eee;
-            border-left: 5px solid var(--ca-red);
-            padding: 20px;
-            margin-bottom: 25px;
-            border-radius: 5px;
-        }
-        .info-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px dashed #eee;
-            font-size: 15px;
-        }
-        .info-item:last-child {
-            border-bottom: none;
-        }
-        .info-label {
-            color: #777;
-            font-weight: 600;
-        }
-        .info-value {
-            color: var(--dark-grey);
-            font-weight: 700;
-        }
-
-        /* ভিজ্যুয়াল আইকন ও স্ট্যাম্প */
-        .icon-gallery {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            margin: 30px 0;
-            color: var(--ca-blue);
-            font-size: 30px;
-        }
-        .icon-gallery i {
-            animation: bounceIn 0.8s ease-out;
-            animation-delay: var(--i);
-            opacity: 0;
-            animation-fill-mode: forwards;
-        }
-        @keyframes bounceIn {
-            0% { transform: scale(0.5); opacity: 0; }
-            50% { transform: scale(1.2); opacity: 1; }
-            100% { transform: scale(1); }
-        }
-
-        .digital-seal {
-            position: absolute;
-            top: 80px;
-            right: 50px;
-            width: 150px;
-            height: 150px;
-            border: 6px double var(--ca-red);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: var(--ca-red);
-            font-weight: 900;
-            font-size: 13px;
-            text-transform: uppercase;
-            transform: rotate(10deg);
-            opacity: 0;
-            animation: stampEffect 0.6s 3.5s forwards;
-            pointer-events: none;
-            line-height: 1.2;
-            z-index: 10;
-        }
-        @keyframes stampEffect {
-            0% { transform: scale(3) rotate(0deg); opacity: 0; }
-            100% { transform: scale(1) rotate(10deg); opacity: 0.35; }
-        }
-
-        .barcode-area {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 30px;
-            border-top: 1px solid #eee;
-            padding-top: 20px;
-        }
-        .barcode-text {
-            font-family: 'Code39', sans-serif; /* কাস্টম বারকোড ফন্ট */
-            font-size: 30px;
-            letter-spacing: 2px;
-            color: #222;
-        }
-        /* বারকোড ফন্ট এর জন্য একটি কাস্টম ফন্ট ইম্পোর্ট করতে হবে */
-        @font-face {
-            font-family: 'Code39';
-            src: url('https://cdn.jsdelivr.net/npm/code39@1.0.0/code39.ttf') format('truetype'); /* এটা তোমার গিটহাব ফোল্ডারে থাকলে বেটার */
-            font-weight: normal;
-            font-style: normal;
-        }
-
-        /* ফুটার */
-        .gov-footer {
-            background: var(--dark-grey);
-            color: white;
-            padding: 15px 30px;
-            text-align: center;
-            font-size: 12px;
-            border-top: 3px solid var(--ca-blue);
-        }
+        #loader { display: none; text-align: center; margin-top: 20px; }
+        .spinner { border: 4px solid #f3f3f3; border-top: 4px solid var(--ca-red); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 0 auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
 
-    <div class="portal-main">
-        <div class="gov-header">
-            <div class="gov-header-left">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Flag_of_Canada_%28Pantone%29.svg" width="35">
-                <div class="gov-logo-text">Government of <span>Canada</span></div>
-            </div>
-            <p style="font-size:12px; color:#555;"><span id="live-date"></span> | <span id="live-time"></span></p>
-        </div>
-
-        <div id="login-section" class="auth-section">
-            <i class="fa-solid fa-user-lock"></i>
-            <h1>Secure Portal Access</h1>
-            <p>আপনার অনলাইন অ্যাপ্লিকেশন স্ট্যাটাস দেখতে, দয়া করে প্রদত্ত সিকিউরিটি কোডটি প্রবেশ করান।</p>
-            
-            <button id="activate-audio-btn" class="btn-action" style="background:#444;" onclick="initSystem()">
-                <i class="fa-solid fa-headset"></i> পোর্টাল সক্রিয় করুন
-            </button>
-
-            <div id="auth-form" style="display:none; margin-top:30px;">
-                <div class="input-group">
-                    <i class="fa-solid fa-key"></i>
-                    <input type="password" id="secret-code" class="access-input" placeholder="Enter Your Access Code">
-                </div>
-                <button class="btn-action" onclick="verifyAccess()">
-                    <i class="fa-solid fa-circle-right"></i> স্ট্যাটাস চেক করুন
-                </button>
-                <div id="loading-animation">
-                    <div class="spinner"></div>
-                    <p style="font-size: 13px; color: #777; margin-top: 10px;">IRCC ডাটাবেস ভেরিফাই করা হচ্ছে...</p>
-                </div>
+    <div class="document-page" id="main-doc">
+        <div id="login-screen">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Flag_of_Canada_%28Pantone%29.svg" width="60" style="margin-bottom: 20px;">
+            <h2 style="color: #333;">IRCC Security Portal</h2>
+            <p style="color: #777;">ফাইল স্ট্যাটাস দেখতে আপনার এক্সেস কোড দিন।</p>
+            <input type="password" id="passCode" placeholder="Enter Access Code">
+            <button class="btn-start" onclick="startVerification()">CHECK STATUS</button>
+            <div id="loader">
+                <div class="spinner"></div>
+                <p style="font-size: 12px; color: #999; margin-top: 10px;">Verifying credentials...</p>
             </div>
         </div>
 
-        <div id="confirmation-letter">
-            <div class="digital-seal">IRCC<br>APPROVED<br>2026</div>
+        <div class="header">
+            <div class="logo-box">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Flag_of_Canada_%28Pantone%29.svg" width="30">
+                Government of <span>Canada</span>
+            </div>
+            <div class="live-clock" id="clock">২৮ জানুয়ারি, ২০২৬ | ৮:৪০:৪০ AM</div>
+        </div>
 
-            <div class="letter-header">
-                <div class="status-badge">
-                    <i class="fa-solid fa-check-circle"></i> APPLICATION APPROVED
-                </div>
-                <h2>Confirmation of Online Application</h2>
-                <p class="sub-text">আপনার আবেদনটি সফলভাবে পর্যালোচনা করা হয়েছে এবং **অনুমোদন** পেয়েছে।</p>
+        <div class="main-content">
+            <div class="status-badge">
+                <i class="fa-solid fa-circle-check"></i> APPLICATION APPROVED
             </div>
 
-            <div class="info-block">
-                <div class="info-item"><span class="info-label">আবেদনকারীর নাম:</span><span class="info-value">সাকিব আল হাসান</span></div>
-                <div class="info-item"><span class="info-label">পাসপোর্ট নম্বর:</span><span class="info-value">BD-SK-778810</span></div>
-                <div class="info-item"><span class="info-label">আবেদনের ধরন:</span><span class="info-value">Student Visa (Higher Education)</span></div>
-                <div class="info-item"><span class="info-label">স্ট্যাটাস:</span><span class="info-value" style="color:var(--success-green); font-weight:bold;">অনুমোদিত (Approved)</span></div>
-                <div class="info-item"><span class="info-label">আবেদন রেফারেন্স:</span><span class="info-value">CA-IRCC-SKB-2026-X</span></div>
-                <div class="info-item"><span class="info-label">ইস্যুকারী অফিস:</span><span class="info-value">Ottawa, Canada</span></div>
-                <div class="info-item"><span class="info-label">ইস্যুর তারিখ:</span><span class="info-value" id="issue-date"></span></div>
+            <div class="doc-title">Confirmation of Online Application</div>
+            <p class="doc-subtitle">আপনার আবেদনটি সফলভাবে পর্যালোচনা করা হয়েছে এবং **অনুমোদন** পেয়েছে।</p>
+
+            <div class="info-container">
+                <img src="https://i.ibb.co/L9Y0p7j/ircc-seal.png" class="official-seal" id="sealImg" alt="IRCC SEAL">
+                <div id="backup-seal" style="position: absolute; top: 20px; right: 20px; border: 4px double #d32f2f; border-radius: 50%; padding: 15px; color: #d32f2f; font-weight: 900; opacity: 0; transform: rotate(15deg); font-size: 12px; text-align: center;">IRCC<br>APPROVED<br>2026</div>
+
+                <table class="info-table">
+                    <tr><td class="label">আবেদনকারীর নাম:</td><td class="value">সাকিব আল হাসান</td></tr>
+                    <tr><td class="label">পাসপোর্ট নম্বর:</td><td class="value">BD-SK-778810</td></tr>
+                    <tr><td class="label">আবেদনের ধরন:</td><td class="value">Student Visa (Higher Education)</td></tr>
+                    <tr><td class="label">স্ট্যাটাস:</td><td class="value" style="color:#2e7d32">অনুমোদিত (Approved)</td></tr>
+                    <tr><td class="label">আবেদন রেফারেন্স:</td><td class="value">CA-IRCC-SKB-2026-X</td></tr>
+                    <tr><td class="label">ইস্যুকারী অফিস:</td><td class="value">Ottawa, Canada</td></tr>
+                    <tr><td class="label">ইস্যুর তারিখ:</td><td class="value">২৮ জানুয়ারি, ২০২৬</td></tr>
+                </table>
             </div>
 
-            <div class="icon-gallery">
-                <i class="fa-solid fa-passport" style="--i:0.1s;"></i>
-                <i class="fa-solid fa-fingerprint" style="--i:0.2s;"></i>
-                <i class="fa-solid fa-plane-departure" style="--i:0.3s;"></i>
-                <i class="fa-solid fa-shield-alt" style="--i:0.4s;"></i>
-                <i class="fa-solid fa-file-invoice" style="--i:0.5s;"></i>
-            </div>
-
-            <div class="barcode-area">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=IRCC_CONFIRMATION_SKB_2026" width="90">
-                <span class="barcode-text">*SKB2026CA*</span>
-            </div>
-
-            <p style="font-size:13px; color:#555; margin-top:30px;">
-                এই অনলাইন ডকুমেন্টটি আপনার ভিসা আবেদনের চূড়ান্ত অনুমোদন নিশ্চিত করে। আরও বিস্তারিত তথ্যের জন্য, অনুগ্রহ করে আপনার নিবন্ধিত ইমেল চেক করুন।
+            <p style="margin-top: 50px; color: #666; font-size: 13px; text-align: left; line-height: 1.6;">
+                এই অনলাইন ডকুমেন্টটি আপনার ভিসা আবেদনের চূড়ান্ত অনুমোদন নিশ্চিত করে। আরও বিস্তারিত তথ্যের জন্য, অনুগ্রহ করে আপনার নিবন্ধিত ইমেল চেক করুন।
             </p>
         </div>
 
-        <div class="gov-footer">
-            Immigration, Refugees and Citizenship Canada (IRCC) <br>
+        <div class="footer-assets">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=IRCC_VERIFIED_SKB2026" width="100">
+            <div class="barcode-text">*SKB2026CA*</div>
+        </div>
+
+        <div class="dark-footer">
+            Immigration, Refugees and Citizenship Canada (IRCC)<br>
             © 2026 King's Printer for Canada. All rights reserved.
         </div>
     </div>
 
-    <audio id="success-sound" src="https://www.soundjay.com/misc/sounds/bell-ringing-01.mp3" preload="auto"></audio>
-    <audio id="fail-sound" src="https://www.soundjay.com/misc/sounds/fail-buzzer-02.mp3" preload="auto"></audio>
-
     <script>
-        function updateLiveTime() {
-            const now = new Date();
-            const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-            const timeOptions = { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
-            document.getElementById('live-date').innerText = now.toLocaleDateString('bn-BD', dateOptions);
-            document.getElementById('live-time').innerText = now.toLocaleTimeString('bn-BD', timeOptions);
-        }
-        setInterval(updateLiveTime, 1000); // প্রতি সেকেন্ডে টাইম আপডেট
-
         function speak(text) {
             const msg = new SpeechSynthesisUtterance(text);
             msg.lang = 'bn-BD';
             msg.rate = 0.9;
-            msg.pitch = 1.3; // সেই মিষ্টি মেয়েলি ভয়েস
+            msg.pitch = 1.3;
             window.speechSynthesis.speak(msg);
         }
 
-        function playSound(soundId) {
-            document.getElementById(soundId).play();
-        }
-
-        function initSystem() {
-            document.getElementById('activate-audio-btn').style.display = 'none';
-            document.getElementById('auth-form').style.display = 'block';
-            speak("কানাডা ইমিগ্রেশন পোর্টাল সক্রিয় করা হলো। আপনার সিকিউরিটি কোডটি প্রবেশ করান।");
-            playSound('success-sound'); // পোর্টাল সক্রিয় হওয়ার শব্দ
-        }
-
-        function verifyAccess() {
-            const code = document.getElementById('secret-code').value;
+        function startVerification() {
+            const code = document.getElementById('passCode').value;
             if (code === "RAFI2026") {
-                document.getElementById('loading-animation').style.display = 'block';
-                speak("আপনার তথ্যগুলো এনক্রিপ্টেড সার্ভার থেকে যাচাই করা হচ্ছে। দয়া করে কিছুক্ষণ অপেক্ষা করুন।");
-                playSound('success-sound'); // যাচাইয়ের সময় শব্দ
+                document.getElementById('loader').style.display = 'block';
+                speak("আপনার তথ্যগুলো ভেরিফাই করা হচ্ছে। দয়া করে অপেক্ষা করুন।");
 
-                // ইস্যু ডেট সেট করা
-                const today = new Date();
-                const issueDateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-                document.getElementById('issue-date').innerText = today.toLocaleDateString('bn-BD', issueDateOptions);
-                
                 setTimeout(() => {
-                    document.getElementById('loading-animation').style.display = 'none';
-                    document.getElementById('login-section').style.display = 'none';
-                    document.getElementById('confirmation-letter').style.display = 'block';
-                    speak("অভিনন্দন। আপনার কানাডা ভিসা আবেদনটি সফলভাবে অনুমোদিত হয়েছে। বিস্তারিত রিপোর্টটি স্ক্রিনে দেওয়া হলো।");
-                    playSound('success-sound'); // সাফল্যের শব্দ
-                }, 4000);
+                    document.getElementById('login-screen').style.display = 'none';
+                    speak("অভিনন্দন! আপনার ভিসা আবেদনটি সফলভাবে অনুমোদিত হয়েছে।");
+                    
+                    // সিল এনিমেশন শুরু
+                    setTimeout(() => {
+                        document.getElementById('info-box').classList.add('sealed'); // class যোগ করা
+                        document.getElementById('backup-seal').style.opacity = "0.3";
+                    }, 1000);
+                }, 3500);
             } else {
-                speak("ভুল কোড। আবার চেষ্টা করুন।");
-                playSound('fail-sound'); // ব্যর্থতার শব্দ
-                alert("ACCESS DENIED: Incorrect Security Code!");
+                speak("ভুল কোড দিয়েছেন। আবার চেষ্টা করুন।");
+                alert("Incorrect Access Code!");
             }
         }
+
+        // লাইভ ঘড়ি
+        setInterval(() => {
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric' });
+            const timeStr = now.toLocaleTimeString('bn-BD', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            document.getElementById('clock').innerText = dateStr + " | " + timeStr;
+        }, 1000);
     </script>
 </body>
 </html>
