@@ -30,24 +30,30 @@
     </div>
 
     <script>
-        // সাইট লোড হলে কথা বলবে
-        window.onload = function() {
-            setTimeout(function() {
-                var msg = new SpeechSynthesisUtterance("কানাডা হাই কমিশন এ আপনাকে স্বাগতম। আপনার কোড দিয়ে সামনের ধাপে এগিয়ে যান।");
-                msg.lang = 'bn-BD';
-                window.speechSynthesis.speak(msg);
-            }, 1000); // ১ সেকেন্ড পর কথা বলবে
-        };
+        // স্ক্রিনে টাচ করলেই স্বাগতম জানাবে
+document.body.addEventListener('click', function() {
+    speakWelcome();
+}, { once: true }); // একবার টাচ করলেই কাজ করবে
 
-        function check() {
-            var input = document.getElementById("code").value;
-            if (input === "RAFI2026") {
-                document.getElementById("content").style.display = "block";
-                var success = new SpeechSynthesisUtterance("কোড সঠিক হয়েছে। আপনাকে স্বাগতম।");
-                success.lang = 'bn-BD';
-                window.speechSynthesis.speak(success);
-            } else {
-                alert("ভুল কোড!");
+function speakWelcome() {
+    var msg = new SpeechSynthesisUtterance("কানাডা হাই কমিশন এ আপনাকে স্বাগতম। আপনার কোড দিয়ে সামনের ধাপে এগিয়ে যান।");
+    msg.lang = 'bn-BD';
+    msg.volume = 1;
+    msg.rate = 1;
+    window.speechSynthesis.speak(msg);
+}
+
+function check() {
+    var input = document.getElementById("code").value;
+    if (input === "RAFI2026") {
+        document.getElementById("content").style.display = "block";
+        var success = new SpeechSynthesisUtterance("কোড সঠিক হয়েছে। আপনাকে স্বাগতম।");
+        success.lang = 'bn-BD';
+        window.speechSynthesis.speak(success);
+    } else {
+        alert("ভুল কোড!");
+    }
+}
             }
         }
     </script>
