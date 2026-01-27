@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>প্রাইভেট পোর্টাল | রাফি</title>
+    <style>
+        /* ব্যাকগ্রাউন্ড ডিজাইন */
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* সুন্দর নীল-বেগুনী গ্রেডিয়েন্ট */
+        }
+
+        /* কার্ড ডিজাইন */
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        h2 { color: #4a4a4a; margin-bottom: 25px; font-size: 24px; }
+
+        /* ইনপুট ফিল্ড */
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            outline: none;
+            box-sizing: border-box;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        input:focus { border-color: #667eea; }
+
+        /* বাটন ডিজাইন */
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover { background: #5a6fd1; transform: translateY(-2px); }
+
+        /* রেজাল্ট সেকশন */
+        #content {
+            display: none;
+            margin-top: 25px;
+            text-align: left;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 12px;
+            border-left: 6px solid #667eea;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        p { margin: 8px 0; color: #555; line-height: 1.6; }
+        strong { color: #333; }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h2>🔒 সিক্রেট পোর্টাল</h2>
+        <input type="password" id="code" placeholder="আপনার গোপন কোড দিন">
+        <button onclick="check()">তথ্য দেখুন</button>
+
+        <div id="content">
+            <h3 style="color: #667eea; margin-top: 0;">স্বাগতম, রাফি!</h3>
+            <p><strong>স্কুল:</strong> ইকরচালী স্কুল (ভোকেশনাল)</p>
+            <p><strong>বিভাগ:</strong> ক্লাস নাইন</p>
+            <p><strong>স্ট্যাটাস:</strong> ডাটাবেস অনলাইন ✅</p>
+            <p><strong>মেসেজ:</strong> আপনার সব ফাইল এখন সুরক্ষিত।</p>
+        </div>
+    </div>
+
+    <script>
+        function check() {
+            var input = document.getElementById("code").value;
+            // এখানে তোমার কোড দাও
+            var mySecret = "RAFI2026"; 
+
+            if (input === mySecret) {
+                document.getElementById("content").style.display = "block";
+                document.querySelector('h2').innerText = "✅ এক্সেস গ্রান্টেড";
+            } else {
+                alert("ভুল কোড! আপনার 'পাগল বন্ধু' কি ট্রাই করছে নাকি?");
+            }
+        }
+    </script>
+
+</body>
+</html>
