@@ -3,145 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IRCC Immigration & Job Portal | Canada</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Canada Visa Status Check</title>
     <style>
-        :root { --ca-red: #D80621; --gov-blue: #004795; --bg: #f4f7f9; }
-        body { font-family: 'Roboto', 'Noto Sans Bengali', sans-serif; margin: 0; background: var(--bg); display: flex; height: 100vh; overflow: hidden; }
-
-        /* Sidebar */
-        .sidebar { width: 260px; background: #2c3e50; color: white; display: flex; flex-direction: column; transition: 0.3s; }
-        .sidebar-header { padding: 20px; background: #1a252f; text-align: center; }
-        .sidebar-menu { flex-grow: 1; padding-top: 20px; }
-        .menu-item { padding: 15px 25px; cursor: pointer; display: flex; align-items: center; gap: 12px; transition: 0.3s; border-left: 4px solid transparent; }
-        .menu-item:hover, .menu-item.active { background: #34495e; border-left-color: var(--ca-red); }
-        .menu-item i { width: 20px; }
-
-        /* Main Content */
-        .main-content { flex-grow: 1; display: flex; flex-direction: column; overflow-y: auto; }
-        .top-nav { background: white; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-
-        /* Document Style */
-        .doc-container { padding: 40px; display: none; animation: fadeIn 0.5s; }
-        .active-doc { display: block; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        .paper { background: white; max-width: 800px; margin: 0 auto; padding: 50px; box-shadow: 0 0 20px rgba(0,0,0,0.1); border-top: 15px solid var(--ca-red); position: relative; }
-        .watermark { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-30deg); font-size: 80px; color: rgba(0,0,0,0.03); font-weight: 900; pointer-events: none; white-space: nowrap; }
-
-        h2 { color: var(--gov-blue); border-bottom: 2px solid #eee; padding-bottom: 10px; }
-        .info-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #f9f9f9; }
-        .label { font-weight: bold; color: #666; }
-        .status-btn { background: #eaf6ec; color: #2e7d32; padding: 5px 15px; border-radius: 20px; font-weight: bold; font-size: 13px; }
-
-        /* Login */
-        #login-screen { position: fixed; inset: 0; background: white; z-index: 9999; display: flex; justify-content: center; align-items: center; flex-direction: column; }
-        .login-card { text-align: center; padding: 40px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 350px; }
-        input { width: 100%; padding: 12px; margin: 15px 0; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
-        .btn { background: var(--ca-red); color: white; border: none; padding: 12px 30px; border-radius: 5px; cursor: pointer; font-weight: bold; width: 100%; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        .container { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%; max-width: 400px; text-align: center; border-top: 5px solid #d52b1e; }
+        img { width: 80px; margin-bottom: 10px; }
+        h2 { color: #333; margin-bottom: 20px; }
+        input { width: 90%; padding: 12px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; font-size: 16px; }
+        button { width: 100%; padding: 12px; background-color: #d52b1e; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 18px; font-weight: bold; transition: 0.3s; }
+        button:hover { background-color: #a31f16; }
+        #result { margin-top: 20px; font-weight: bold; color: #555; display: none; padding: 10px; border-radius: 5px; }
     </style>
 </head>
 <body>
 
-    <div id="login-screen">
-        <div class="login-card">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Flag_of_Canada_%28Pantone%29.svg" width="60">
-            <h2 style="margin: 20px 0;">IRCC Master Portal</h2>
-            <input type="password" id="pass" placeholder="সিকিউরিটি পিন দিন">
-            <button class="btn" onclick="login()">প্রবেশ করুন</button>
-        </div>
-    </div>
+<div class="container">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Flag_of_Canada_%28Pantone%29.svg" alt="Canada Flag">
+    <h2>ভিসা স্ট্যাটাস চেক করুন</h2>
+    
+    <input type="text" id="passport" placeholder="পাসপোর্ট নম্বর দিন" required>
+    <input type="text" id="appID" placeholder="অ্যাপ্লিকেশন আইডি দিন" required>
+    
+    <button onclick="checkStatus()">সার্চ করুন</button>
 
-    <div class="sidebar">
-        <div class="sidebar-header">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Flag_of_Canada_%28Pantone%29.svg" width="40">
-            <div style="font-size: 12px; margin-top: 5px;">Government of Canada</div>
-        </div>
-        <div class="sidebar-menu">
-            <div class="menu-item active" onclick="showDoc('visa')"><i class="fa-solid fa-passport"></i>ভিসা স্ট্যাটাস</div>
-            <div class="menu-item" onclick="showDoc('job')"><i class="fa-solid fa-briefcase"></i>জব অফার লেটার</div>
-            <div class="menu-item" onclick="showDoc('work')"><i class="fa-solid fa-id-card"></i>ওয়ার্ক পারমিট</div>
-            <div class="menu-item" onclick="showDoc('lmia')"><i class="fa-solid fa-file-contract"></i>LMIA লেটার</div>
-        </div>
-        <div style="padding: 20px; font-size: 10px; opacity: 0.5;">Secure Node: CC-8812</div>
-    </div>
+    <div id="result"></div>
+</div>
 
-    <div class="main-content">
-        <div class="top-nav">
-            <div style="font-weight: bold;">ড্যাশবোর্ড / <span id="nav-title">ভিসা স্ট্যাটাস</span></div>
-            <div style="font-size: 14px; color: #888;" id="clock"></div>
-        </div>
+<script>
+    function checkStatus() {
+        const passport = document.getElementById('passport').value;
+        const resultDiv = document.getElementById('result');
 
-        <div id="visa" class="doc-container active-doc">
-            <div class="paper">
-                <div class="watermark">APPROVED</div>
-                <h2>Confirmation of Visa</h2>
-                <div class="info-row"><span class="label">নাম:</span><span>সাকিব আল হাসান</span></div>
-                <div class="info-row"><span class="label">পাসপোর্ট:</span><span>BD-SK-778810</span></div>
-                <div class="info-row"><span class="label">স্ট্যাটাস:</span><span class="status-btn">Approved</span></div>
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=VISA_OK" style="margin-top: 20px;">
-            </div>
-        </div>
-
-        <div id="job" class="doc-container">
-            <div class="paper">
-                <h2>Job Offer Letter</h2>
-                <p>Date: January 28, 2026</p>
-                <p><strong>Company:</strong> Canadian Tech Solutions Inc.</p>
-                <p><strong>Position:</strong> Senior Technical Supervisor</p>
-                <p>আপনার দক্ষতা অনুযায়ী আপনাকে মাসিক ৫,৫০০ কানাডিয়ান ডলার বেতনে নিয়োগ দেওয়া হয়েছে।</p>
-                <div class="info-row"><span class="label">Location:</span><span>Toronto, ON</span></div>
-                <div style="margin-top: 30px; text-align: right;">
-                    <img src="https://i.postimg.cc/mD8X7G4Y/signature.png" width="120" style="opacity: 0.6;">
-                    <p style="font-size: 10px;">HR Manager Signature</p>
-                </div>
-            </div>
-        </div>
-
-        <div id="work" class="doc-container">
-            <div class="paper">
-                <div class="watermark">WORK PERMIT</div>
-                <h2>Official Work Permit (Form IMM-1295)</h2>
-                <div class="info-row"><span class="label">Permit No:</span><span>W882-991-002</span></div>
-                <div class="info-row"><span class="label">Employer:</span><span>Canadian Tech Solutions</span></div>
-                <div class="info-row"><span class="label">Validity:</span><span>3 Years (Open)</span></div>
-                <p style="font-size: 12px; margin-top: 40px; color: #888;">* এই পারমিটটি কানাডায় লিগ্যাল কাজের অধিকার প্রদান করে।</p>
-            </div>
-        </div>
-
-        <div id="lmia" class="doc-container">
-            <div class="paper">
-                <h2>LMIA Approval Letter</h2>
-                <div style="background: #f0f7ff; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
-                    <strong>Decision: Positive LMIA</strong>
-                </div>
-                <div class="info-row"><span class="label">System File:</span><span>LM-2026-CA-99</span></div>
-                <p>ESDC (Employment and Social Development Canada) আপনার কোম্পানির আবেদনটি অনুমোদন করেছে। এই পজিটিভ রেজাল্ট আপনার ওয়ার্ক পারমিট প্রসেস সম্পন্ন করতে সাহায্য করবে।</p>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function login() {
-            if(document.getElementById('pass').value === "RAFI2026") {
-                document.getElementById('login-screen').style.display = 'none';
-                const m = new SpeechSynthesisUtterance("মাস্টার পোর্টালে আপনাকে স্বাগতম। আপনার সব ডকুমেন্টস এখানে প্রস্তুত আছে।");
-                m.lang = 'bn-BD'; window.speechSynthesis.speak(m);
-            } else { alert("ভুল পিন!"); }
+        if(passport === "") {
+            alert("দয়া করে পাসপোর্ট নম্বর দিন");
+            return;
         }
 
-        function showDoc(id) {
-            document.querySelectorAll('.doc-container').forEach(d => d.classList.remove('active-doc'));
-            document.querySelectorAll('.menu-item').forEach(m => m.classList.remove('active'));
-            document.getElementById(id).classList.add('active-doc');
-            event.currentTarget.classList.add('active');
-            document.getElementById('nav-title').innerText = event.currentTarget.innerText;
-        }
+        resultDiv.style.display = "block";
+        resultDiv.style.backgroundColor = "#fff3cd";
+        resultDiv.innerHTML = "লোডিং হচ্ছে... দয়া করে অপেক্ষা করুন।";
 
-        setInterval(() => {
-            document.getElementById('clock').innerText = new Date().toLocaleString('bn-BD');
-        }, 1000);
-    </script>
+        // ২ সেকেন্ড পর রেজাল্ট দেখাবে (মজা করার জন্য)
+        setTimeout(() => {
+            resultDiv.style.backgroundColor = "#d4edda";
+            resultDiv.style.color = "#155724";
+            resultDiv.innerHTML = "অভিনন্দন! আপনার ভিসা প্রসেসিং সফল হয়েছে। <br> স্ট্যাটাস: Approved";
+        }, 2000);
+    }
+</script>
+
 </body>
 </html>
