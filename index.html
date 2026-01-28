@@ -12,23 +12,27 @@
         h2 { color: #d52b1e; margin: 5px 0; font-size: 22px; }
         .sub-title { color: #666; font-size: 13px; margin-bottom: 20px; }
         
-        input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; font-size: 15px; }
-        button { width: 100%; padding: 14px; background-color: #d52b1e; color: white; border: none; border-radius: 10px; cursor: pointer; font-size: 18px; font-weight: bold; margin-top: 10px; }
+        input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; font-size: 15px; background: #fafafa; }
+        button { width: 100%; padding: 14px; background-color: #d52b1e; color: white; border: none; border-radius: 10px; cursor: pointer; font-size: 18px; font-weight: bold; margin-top: 10px; box-shadow: 0 4px 10px rgba(213, 43, 30, 0.3); }
         
-        /* ম্যাপ সেকশন ফিক্স */
-        .map-section { margin-top: 15px; border-radius: 12px; overflow: hidden; border: 1px solid #ddd; background: #eee; height: 150px; }
-        .location-text { font-size: 12px; color: #555; margin: 5px 0; font-weight: bold; }
+        /* ম্যাপ সেকশন নতুন ভাবে ডিজাইন করা */
+        .map-section { margin-top: 15px; border-radius: 12px; overflow: hidden; border: 1px solid #ddd; height: 160px; position: relative; }
+        .location-label { font-size: 12px; color: #444; margin-top: 10px; font-weight: bold; }
 
         /* পপ-আপ ডকুমেন্ট থিম */
         #visa-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 999; justify-content: center; align-items: center; }
-        .visa-card { background: #f9fff9; width: 85%; max-width: 320px; padding: 20px; border-radius: 15px; border: 4px solid #4caf50; position: relative; }
-        .doc-header { background: #4caf50; color: white; padding: 8px; border-radius: 5px; font-weight: bold; text-align: center; margin-bottom: 15px; font-size: 13px; }
-        .info-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-size: 13px; border-bottom: 1px solid #ddd; padding-bottom: 5px; text-align: left; }
-        .status-btn { background: #4caf50; color: white; padding: 5px 15px; border-radius: 20px; font-size: 11px; font-weight: bold; margin: 10px auto; display: block; width: fit-content; }
-        .footer-assets { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; }
-        .qr-code { width: 70px; }
-        .seal { width: 70px; opacity: 0.8; }
-        .close-btn { position: absolute; top: -35px; right: 0; color: white; font-size: 25px; cursor: pointer; }
+        .visa-card { background: #f9fff9; width: 85%; max-width: 320px; padding: 20px; border-radius: 15px; border: 4px solid #4caf50; position: relative; animation: slideUp 0.5s ease; }
+        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        
+        .doc-header { background: #4caf50; color: white; padding: 10px; border-radius: 5px; font-weight: bold; text-align: center; margin-bottom: 15px; font-size: 14px; }
+        .info-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-size: 13px; border-bottom: 1px solid #eee; padding-bottom: 5px; text-align: left; }
+        .info-row i { color: #d52b1e; width: 15px; }
+        
+        .status-badge { background: #4caf50; color: white; padding: 6px 15px; border-radius: 20px; font-size: 12px; font-weight: bold; margin: 15px auto; display: block; width: fit-content; }
+        .footer-assets { display: flex; justify-content: space-between; align-items: center; margin-top: 15px; }
+        .qr-code { width: 75px; }
+        .seal { width: 70px; opacity: 0.8; filter: drop-shadow(0 0 5px rgba(0,0,0,0.1)); }
+        .close-btn { position: absolute; top: -40px; right: 0; color: white; font-size: 35px; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -38,20 +42,21 @@
     <h2>Canada Visa Status</h2>
     <p class="sub-title">ইমিগ্রেশন এবং নাগরিকত্ব যাচাইকরণ পোর্টাল</p>
     
-    <input type="text" id="passport" placeholder="পাসপোর্ট নম্বর: RAFI2026">
-    <input type="text" id="appID" placeholder="অ্যাপ্লিকেশন আইডি: CAN547">
+    <input type="text" id="passport" placeholder="পাসপোর্ট নম্বর দিন">
+    <input type="text" id="appID" placeholder="অ্যাপ্লিকেশন আইডি দিন">
     
     <button onclick="checkVisa()">সার্চ করুন</button>
 
-    <div class="location-text"><i class="fa-solid fa-location-dot"></i> অফিস: টরেন্টো, ওন্টারিও, কানাডা</div>
+    <div class="location-label"><i class="fa-solid fa-location-dot" style="color:#d52b1e"></i> টরেন্টো, ওন্টারিও, কানাডা</div>
     <div class="map-section">
         <iframe 
             width="100%" 
             height="100%" 
+            src="https://maps.google.com/maps?q=Toronto,Canada&t=&z=13&ie=UTF8&iwloc=&output=embed" 
             frameborder="0" 
-            style="border:0" 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m12!1m3!1d184512.392730304!2d-79.51814261!3d43.7181557!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89d4cb90d7c63ba5%3A0x323557113a375429!2sToronto%2C%20ON%2C%20Canada!5e0!3m2!1sen!2sbd!4v1700000000000!5m2!1sen!2sbd" 
-            allowfullscreen>
+            scrolling="no" 
+            marginheight="0" 
+            marginwidth="0">
         </iframe>
     </div>
 </div>
@@ -63,13 +68,14 @@
         
         <div class="info-row"><i class="fa-solid fa-user"></i> <span><strong>নাম:</strong> MD RAFI</span></div>
         <div class="info-row"><i class="fa-solid fa-id-card"></i> <span><strong>পাসপোর্ট:</strong> <span id="resPass"></span></span></div>
-        <div class="info-row"><i class="fa-solid fa-calendar-days"></i> <span><strong>মেয়াদ:</strong> ৩০ জানুয়ারি, ২০৩০</span></div>
+        <div class="info-row"><i class="fa-solid fa-plane-departure"></i> <span><strong>ভিসার ধরন:</strong> Student/Vocational</span></div>
+        <div class="info-row"><i class="fa-solid fa-calendar-check"></i> <span><strong>মেয়াদ:</strong> ৩০ জানুয়ারি, ২০৩০</span></div>
 
-        <div class="status-btn">STATUS: APPROVED</div>
+        <div class="status-badge">STATUS: APPROVED / ভেরিফাইড</div>
 
         <div class="footer-assets">
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=APPROVED-RAFI" class="qr-code">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Flag_of_Canada_%28Pantone%29.svg/1200px-Flag_of_Canada_%28Pantone%29.svg.png" class="seal" style="filter: contrast(150%) sepia(100%) hue-rotate(-50deg);">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=VISA-APPROVED-RAFI-2026" class="qr-code">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Flag_of_Canada_%28Pantone%29.svg/1200px-Flag_of_Canada_%28Pantone%29.svg.png" class="seal">
         </div>
     </div>
 </div>
@@ -84,15 +90,15 @@
 
     function checkVisa() {
         const pass = document.getElementById('passport').value;
-        if(!pass) { alert("তথ্য দিন"); return; }
+        if(!pass) { alert("পাসপোর্ট নম্বর দিন"); return; }
 
-        speak("টরেন্টো অফিস থেকে আপনার তথ্য যাচাই করা হচ্ছে...");
+        speak("টরেন্টো সার্ভার থেকে আপনার তথ্য যাচাই করা হচ্ছে। অনুগ্রহ করে অপেক্ষা করুন।");
         
         setTimeout(() => {
             document.getElementById('resPass').innerText = pass;
             document.getElementById('visa-modal').style.display = 'flex';
-            speak("অভিনন্দন! আপনার কানাডা ভিসা অনুমোদন করা হয়েছে।");
-        }, 2500);
+            speak("অভিনন্দন রাফি! আপনার কানাডা ভিসা টরেন্টো অফিস থেকে অনুমোদন করা হয়েছে। কিউআর কোডটি চেক করুন।");
+        }, 3000);
     }
 
     function closeModal() {
