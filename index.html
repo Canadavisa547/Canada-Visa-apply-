@@ -3,33 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Canada Visa Status - Toronto Portal</title>
+    <title>Canada Visa Official Portal</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body { font-family: 'Arial', sans-serif; background-color: #f0f2f5; margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
-        .container { background: white; padding: 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 100%; max-width: 400px; text-align: center; border-top: 8px solid #d52b1e; position: relative; }
+        .container { background: white; padding: 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 100%; max-width: 400px; text-align: center; border-top: 8px solid #d52b1e; }
         .flag { width: 70px; margin-bottom: 10px; }
         h2 { color: #d52b1e; margin: 5px 0; font-size: 22px; }
         .sub-title { color: #666; font-size: 13px; margin-bottom: 20px; }
         
-        input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; font-size: 15px; background: #fafafa; }
-        button { width: 100%; padding: 14px; background-color: #d52b1e; color: white; border: none; border-radius: 10px; cursor: pointer; font-size: 18px; font-weight: bold; margin-top: 10px; box-shadow: 0 4px 10px rgba(213, 43, 30, 0.3); }
+        input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; font-size: 15px; }
+        button { width: 100%; padding: 14px; background-color: #d52b1e; color: white; border: none; border-radius: 10px; cursor: pointer; font-size: 18px; font-weight: bold; margin-top: 10px; }
         
-        .map-section { margin-top: 15px; border-radius: 12px; overflow: hidden; border: 1px solid #ddd; }
-        .location-text { font-size: 11px; color: #888; margin: 5px 0; }
+        /* ম্যাপ সেকশন ফিক্স */
+        .map-section { margin-top: 15px; border-radius: 12px; overflow: hidden; border: 1px solid #ddd; background: #eee; height: 150px; }
+        .location-text { font-size: 12px; color: #555; margin: 5px 0; font-weight: bold; }
 
-        /* ডকুমেন্ট থিম */
-        #visa-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 999; justify-content: center; align-items: center; }
-        .visa-card { background: #f9fff9; width: 90%; max-width: 350px; padding: 20px; border-radius: 15px; border: 5px solid #4caf50; position: relative; text-align: left; }
-        .doc-header { background: #4caf50; color: white; padding: 10px; border-radius: 8px; font-weight: bold; text-align: center; margin-bottom: 15px; font-size: 14px; }
-        .info-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-size: 14px; border-bottom: 1px solid #e0e0e0; padding-bottom: 5px; }
-        .info-row i { color: #d52b1e; width: 15px; }
-        
-        .status-btn { background: #4caf50; color: white; padding: 5px 15px; border-radius: 20px; font-size: 12px; font-weight: bold; text-align: center; margin: 15px auto 10px; display: block; width: fit-content; }
+        /* পপ-আপ ডকুমেন্ট থিম */
+        #visa-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 999; justify-content: center; align-items: center; }
+        .visa-card { background: #f9fff9; width: 85%; max-width: 320px; padding: 20px; border-radius: 15px; border: 4px solid #4caf50; position: relative; }
+        .doc-header { background: #4caf50; color: white; padding: 8px; border-radius: 5px; font-weight: bold; text-align: center; margin-bottom: 15px; font-size: 13px; }
+        .info-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-size: 13px; border-bottom: 1px solid #ddd; padding-bottom: 5px; text-align: left; }
+        .status-btn { background: #4caf50; color: white; padding: 5px 15px; border-radius: 20px; font-size: 11px; font-weight: bold; margin: 10px auto; display: block; width: fit-content; }
         .footer-assets { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; }
-        .qr-code { width: 80px; height: 80px; }
-        .official-seal { width: 80px; opacity: 0.8; }
-        .close-btn { position: absolute; top: -40px; right: 0; color: white; font-size: 30px; cursor: pointer; }
+        .qr-code { width: 70px; }
+        .seal { width: 70px; opacity: 0.8; }
+        .close-btn { position: absolute; top: -35px; right: 0; color: white; font-size: 25px; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -44,27 +43,33 @@
     
     <button onclick="checkVisa()">সার্চ করুন</button>
 
+    <div class="location-text"><i class="fa-solid fa-location-dot"></i> অফিস: টরেন্টো, ওন্টারিও, কানাডা</div>
     <div class="map-section">
-        <p class="location-text"><i class="fa-solid fa-location-dot"></i> অফিস: টরেন্টো, ওন্টারিও, কানাডা</p>
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m12!1m3!1d184512.392730609!2d-79.5428633!3d43.7181557!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89d4cb90d7c69ba5%3A0x881e5880491959!2sToronto%2C%20ON%2C%20Canada!5e0!3m2!1sen!2sbd!4v1700000000000" width="100%" height="120" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        <iframe 
+            width="100%" 
+            height="100%" 
+            frameborder="0" 
+            style="border:0" 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m12!1m3!1d184512.392730304!2d-79.51814261!3d43.7181557!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89d4cb90d7c63ba5%3A0x323557113a375429!2sToronto%2C%20ON%2C%20Canada!5e0!3m2!1sen!2sbd!4v1700000000000!5m2!1sen!2sbd" 
+            allowfullscreen>
+        </iframe>
     </div>
 </div>
 
 <div id="visa-modal">
     <div class="visa-card">
-        <span class="close-btn" onclick="closeModal()">&times;</span>
-        <div class="doc-header"><i class="fa-solid fa-circle-check"></i> OFFICIAL APPROVAL NOTICE</div>
+        <span class="close-btn" onclick="closeModal()">×</span>
+        <div class="doc-header">OFFICIAL APPROVAL NOTICE</div>
         
-        <div class="info-row"><i class="fa-solid fa-user"></i> <strong>নাম:</strong> MD RAFI</div>
-        <div class="info-row"><i class="fa-solid fa-id-card"></i> <strong>পাসপোর্ট:</strong> <span id="resPass"></span></div>
-        <div class="info-row"><i class="fa-solid fa-briefcase"></i> <strong>ভিসার ধরণ:</strong> Student/Vocational</div>
-        <div class="info-row"><i class="fa-solid fa-calendar-days"></i> <strong>মেয়াদ:</strong> ৩০ জানুয়ারি, ২০৩০ পর্যন্ত</div>
+        <div class="info-row"><i class="fa-solid fa-user"></i> <span><strong>নাম:</strong> MD RAFI</span></div>
+        <div class="info-row"><i class="fa-solid fa-id-card"></i> <span><strong>পাসপোর্ট:</strong> <span id="resPass"></span></span></div>
+        <div class="info-row"><i class="fa-solid fa-calendar-days"></i> <span><strong>মেয়াদ:</strong> ৩০ জানুয়ারি, ২০৩০</span></div>
 
-        <div class="status-btn">STATUS: APPROVED / ভেরিফাইড</div>
+        <div class="status-btn">STATUS: APPROVED</div>
 
         <div class="footer-assets">
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=RAFI-VISA-APPROVED" class="qr-code">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Flag_of_Canada_%28Pantone%29.svg/1200px-Flag_of_Canada_%28Pantone%29.svg.png" class="official-seal" style="filter: grayscale(100%) sepia(100%) hue-rotate(-50deg) saturate(600%) brightness(0.8);">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=APPROVED-RAFI" class="qr-code">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Flag_of_Canada_%28Pantone%29.svg/1200px-Flag_of_Canada_%28Pantone%29.svg.png" class="seal" style="filter: contrast(150%) sepia(100%) hue-rotate(-50deg);">
         </div>
     </div>
 </div>
@@ -79,21 +84,15 @@
 
     function checkVisa() {
         const pass = document.getElementById('passport').value;
-        const app = document.getElementById('appID').value;
+        if(!pass) { alert("তথ্য দিন"); return; }
 
-        if(!pass || !app) {
-            speak("দয়া করে পাসপোর্ট এবং আইডি দিন");
-            alert("সব তথ্য পূরণ করুন");
-            return;
-        }
-
-        speak("টরেন্টো সার্ভার থেকে আপনার তথ্য যাচাই করা হচ্ছে...");
+        speak("টরেন্টো অফিস থেকে আপনার তথ্য যাচাই করা হচ্ছে...");
         
         setTimeout(() => {
             document.getElementById('resPass').innerText = pass;
             document.getElementById('visa-modal').style.display = 'flex';
-            speak("অভিনন্দন রাফি! আপনার কানাডা ভিসা টরেন্টো অফিস থেকে অ্যাপ্রুভ হয়েছে। কিউআর কোডটি চেক করুন।");
-        }, 3000);
+            speak("অভিনন্দন! আপনার কানাডা ভিসা অনুমোদন করা হয়েছে।");
+        }, 2500);
     }
 
     function closeModal() {
