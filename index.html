@@ -3,47 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Canada Visa Official Check</title>
+    <title>Canada Visa Official Portal</title>
     <style>
-        body { font-family: 'Arial', sans-serif; background-color: #f0f2f5; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
-        .container { background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); width: 90%; max-width: 450px; text-align: center; border-top: 8px solid #d52b1e; }
-        .flag { width: 100px; margin-bottom: 15px; border-radius: 5px; }
-        h2 { color: #d52b1e; margin-bottom: 5px; font-size: 24px; }
-        p.sub-text { color: #666; margin-bottom: 25px; font-size: 14px; }
-        .input-group { text-align: left; margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; font-weight: bold; color: #333; }
-        input { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 16px; transition: 0.3s; }
-        input:focus { border-color: #d52b1e; outline: none; }
-        button { width: 100%; padding: 15px; background-color: #d52b1e; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 18px; font-weight: bold; margin-top: 10px; transition: 0.3s; box-shadow: 0 4px 10px rgba(213, 43, 30, 0.3); }
-        button:hover { background-color: #a31f16; transform: translateY(-2px); }
-        #result { margin-top: 25px; padding: 15px; border-radius: 8px; display: none; font-size: 16px; line-height: 1.5; }
-        .map-box { margin-top: 20px; border-radius: 10px; overflow: hidden; border: 1px solid #ddd; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; margin: 0; padding: 20px; }
+        .container { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); max-width: 500px; margin: auto; text-align: center; border-top: 6px solid #d52b1e; }
+        .header-img { width: 70px; }
+        h2 { color: #d52b1e; margin-top: 10px; }
+        input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; }
+        button { width: 100%; padding: 15px; background: #d52b1e; color: white; border: none; border-radius: 6px; font-size: 18px; cursor: pointer; font-weight: bold; }
+        
+        /* ডকুমেন্ট স্টাইল */
+        #visa-document { display: none; margin-top: 20px; border: 2px dashed #bbb; padding: 20px; background: #fff; text-align: left; position: relative; }
+        .visa-header { border-bottom: 2px solid #d52b1e; padding-bottom: 10px; margin-bottom: 15px; font-weight: bold; color: #d52b1e; }
+        .info-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+        .label { color: #555; font-weight: bold; }
+        .barcode { font-family: 'Libre Barcode 39', cursive; font-size: 40px; text-align: center; margin-top: 15px; display: block; }
+        .stamp { position: absolute; right: 20px; bottom: 50px; border: 3px solid #155724; color: #155724; padding: 5px; transform: rotate(-15deg); font-weight: bold; border-radius: 5px; opacity: 0.7; }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Barcode+39&display=swap" rel="stylesheet">
 </head>
 <body>
 
 <div class="container">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Flag_of_Canada_%28Pantone%29.svg" class="flag" alt="Canada">
-    <h2>Canada Visa Status</h2>
-    <p class="sub-text">ইমিগ্রেশন এবং নাগরিকত্ব যাচাইকরণ পোর্টাল</p>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Flag_of_Canada_%28Pantone%29.svg" class="header-img">
+    <h2>Visa Status Checker</h2>
+    <p style="font-size: 13px; color: #666;">Government of Canada - Immigration Department</p>
     
-    <div class="input-group">
-        <label>পাসপোর্ট নম্বর:</label>
-        <input type="text" id="passport" placeholder="যেমন: A01234567">
-    </div>
+    <input type="text" id="passInput" placeholder="Enter Passport Number">
+    <input type="text" id="appInput" placeholder="Enter Application ID">
+    <button onclick="processVisa()">Track Application</button>
 
-    <div class="input-group">
-        <label>অ্যাপ্লিকেশন আইডি:</label>
-        <input type="text" id="appID" placeholder="যেমন: CAN987654">
-    </div>
-    
-    <button onclick="checkStatus()">সার্চ করুন</button>
-
-    <div id="result"></div>
-
-    <div class="map-box">
-        <p style="font-size: 12px; color: #777; margin: 5px;">অফিস লোকেশন: অটোয়া, কানাডা</p>
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d179212.871013751!2d-75.811151!3d45.42153!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cce05b25f5113af%3A0x8a6a51e1305e16c!2sOttawa%2C%20ON%2C%20Canada!5e0!3m2!1sen!2sbd!4v1700000000000" width="100%" height="150" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    <div id="visa-document">
+        <div class="visa-header">CANADIAN VISA APPROVAL NOTICE</div>
+        
+        <div class="info-row"><span class="label">Name:</span> <span id="resName">MD RAFI</span></div>
+        <div class="info-row"><span class="label">Passport:</span> <span id="resPass"></span></div>
+        <div class="info-row"><span class="label">Visa Type:</span> <span>Student / Vocational</span></div>
+        <div class="info-row"><span class="label">Expiry Date:</span> <span>28 JAN 2030</span></div>
+        <div class="info-row"><span class="label">Status:</span> <span style="color: green; font-weight: bold;">APPROVED</span></div>
+        
+        <div class="stamp">VERIFIED</div>
+        <div class="barcode">123456789</div>
+        <p style="font-size: 10px; color: #999; text-align: center;">This is a computer-generated document for verification purposes.</p>
     </div>
 </div>
 
@@ -51,34 +52,25 @@
     function speak(text) {
         const msg = new SpeechSynthesisUtterance();
         msg.text = text;
-        msg.lang = 'bn-BD'; // বাংলা ভয়েস
+        msg.lang = 'bn-BD';
         window.speechSynthesis.speak(msg);
     }
 
-    function checkStatus() {
-        const passport = document.getElementById('passport').value;
-        const resultDiv = document.getElementById('result');
-
-        if(passport === "") {
-            speak("দয়া করে আপনার পাসপোর্ট নম্বর দিন");
-            alert("দয়া করে পাসপোর্ট নম্বর দিন");
+    function processVisa() {
+        const pass = document.getElementById('passInput').value;
+        if(!pass) {
+            alert("Please enter passport number");
             return;
         }
 
-        resultDiv.style.display = "block";
-        resultDiv.style.backgroundColor = "#eef";
-        resultDiv.style.color = "#333";
-        resultDiv.innerHTML = "<b>যাচাই করা হচ্ছে...</b>";
+        speak("আপনার তথ্য যাচাই করা হচ্ছে। অনুগ্রহ করে অপেক্ষা করুন।");
         
-        speak("আপনার স্ট্যাটাস যাচাই করা হচ্ছে, দয়া করে অপেক্ষা করুন");
+        document.getElementById('visa-document').style.display = "none";
 
         setTimeout(() => {
-            resultDiv.style.backgroundColor = "#d4edda";
-            resultDiv.style.color = "#155724";
-            resultDiv.style.border = "1px solid #c3e6cb";
-            const successText = "অভিনন্দন! আপনার কানাডা ভিসা অ্যাপ্রুভ হয়েছে। আপনার পাসপোর্ট সংগ্রহ করুন।";
-            resultDiv.innerHTML = "<strong>Status: APPROVED</strong><br>" + successText;
-            speak(successText);
+            document.getElementById('resPass').innerText = pass;
+            document.getElementById('visa-document').style.display = "block";
+            speak("অভিনন্দন! আপনার কানাডা ভিসা অনুমোদন করা হয়েছে। নিচের ডকুমেন্টটি চেক করুন।");
         }, 3000);
     }
 </script>
